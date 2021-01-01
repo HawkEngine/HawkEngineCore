@@ -17,6 +17,11 @@ public class InstanceManager
 	
 	public static Window InitializeWindow(String title, int width, int height)
 	{
+		if(InstanceManager.hasWindowInstance)
+		{
+			System.out.println("[HawkEngine (InstanceManager[Window(WARNING)])] Creating two window instances is dangerous!");
+		}
+		
 		WindowAPIS windowApi = APIManager.getSelectedWindowAPI();
 		
 		switch(windowApi)

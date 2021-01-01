@@ -13,6 +13,7 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import com.github.HawkEngine.Core.HawkEngine.*;
+import com.github.HawkEngine.Core.HawkEngine.Events.*;
 
 public class GLFWPlatformWindow extends Window
 {
@@ -48,6 +49,14 @@ public class GLFWPlatformWindow extends Window
 		{
 			System.err.println("[HawkEngine (GLFW Logger[FATAL])] Failed to initialize GLFW window!");
 		}
+		
+		glfwSetKeyCallback(this.handle, (handle, key, scancode, action, mods) -> 
+		{
+			if(action == GLFW_PRESS || action == GLFW_REPEAT)
+			{
+				InputManager.RunInputEvent(key);
+			}
+		});
 		
 		try(MemoryStack stack = stackPush())
 		{
